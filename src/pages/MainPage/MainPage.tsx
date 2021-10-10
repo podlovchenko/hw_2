@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { getSettings } from '../../dataProviders';
-import { ISettings } from '../../types/settings';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { getSettingsAsync, selectSettings } from '../../reducers/repository';
 import BuildsHistoryPage from '../BuildsHistoryPage/BuildsHistoryPage';
 import StartPage from '../StartPage/StartPage';
 
 const MainPage = () => {
-    const [settings, setSettings] = useState<ISettings | undefined>(undefined);
+    const dispatch = useAppDispatch();
+    const settings = useAppSelector(selectSettings);
     useEffect(() => {
-        (async () => {
-            try {
-                const settings: ISettings = await getSettings();
-
-                if (settings) {
-                    setSettings(settings);
-                }
-            } catch {}
-        })();
-    }, []);
+        dispatch(getSettingsAsync());
+    }, [dispatch]);
 
     return settings ? <BuildsHistoryPage settings={settings} /> : <StartPage />;
 };

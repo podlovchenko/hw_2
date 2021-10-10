@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
@@ -9,7 +9,8 @@ import {
     SETTINGS,
     SETTINGS_DESCRIPTION,
 } from '../../constants/text';
-import { IFormField, FormData } from '../../types/form';
+import { Status } from '../../reducers/repository';
+import { FormData, IFormField } from '../../types/form';
 import { ISettings } from '../../types/settings';
 import classes from './SettingsForm.module.css';
 
@@ -52,15 +53,44 @@ function reducer(state: State, { type, payload }: IAction) {
 }
 
 interface IProps {
+    status: Status;
     settings?: ISettings;
-    onSubmit: (data: FormData) => Promise<any>;
+    onSubmit: (data: FormData) => void;
     onCancel: () => void;
     onRedirect: () => void;
 }
 
-const SettingsForm = ({ settings, onSubmit, onCancel, onRedirect }: IProps) => {
+const SettingsForm = ({
+    status,
+    settings,
+    onSubmit,
+    onCancel,
+    onRedirect,
+}: IProps) => {
+    const [statusFromProps, setStatusFromProps] = useState(status);
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (status && status !== statusFromProps) {
+            if (status === Status.Fail) {
+                setDisabled(false);
+                setError(true);
+            }
+
+            if (status === Status.Loading) {
+                setDisabled(true);
+                setError(false);
+            }
+
+            if (status === Status.Success) {
+                setDisabled(false);
+                onRedirect();
+            }
+        }
+
+        setStatusFromProps(status);
+    }, [status, onRedirect]);
 
     const initialSettings: FormData = {
         [IFormField.Repository]:
@@ -106,10 +136,7 @@ const SettingsForm = ({ settings, onSubmit, onCancel, onRedirect }: IProps) => {
             }),
         []
     );
-    const onSubmitForm = async () => {
-        setDisabled(true);
-        setError(false);
-
+    const onSubmitForm = () => {
         const formData = {
             ...state,
             ...(state[IFormField.Time] && {
@@ -117,14 +144,7 @@ const SettingsForm = ({ settings, onSubmit, onCancel, onRedirect }: IProps) => {
             }),
         };
 
-        onSubmit(formData)
-            .then(() => {
-                onRedirect();
-            })
-            .catch(() => {
-                setError(true);
-                setDisabled(false);
-            });
+        onSubmit(formData);
     };
     const onCancelForm = useCallback(() => {
         onCancel();
