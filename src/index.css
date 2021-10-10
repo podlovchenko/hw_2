@@ -8,6 +8,10 @@ body {
     display: grid;
 }
 
+#modal {
+    position: absolute;
+}
+
 #root {
     display: grid;
 }

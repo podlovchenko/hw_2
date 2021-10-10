@@ -8,6 +8,10 @@ export const SHOW_MORE = 'Show more';
 export const SETTINGS = 'Settings';
 export const SETTINGS_DESCRIPTION =
     'Configure repository connection and synchronization settings.';
+export const NEW_BUILD = 'New build';
+export const NEW_BUILD_DESCRIPTION = 'Enter the commit which you want to build';
+export const RUN_BUILD = 'Run build';
+export const COMMIT_HASH = 'Commit hash';
 
 export const FIELDS = {
     [IFormField.Repository]: {
