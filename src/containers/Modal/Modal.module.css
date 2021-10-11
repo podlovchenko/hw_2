@@ -1,0 +1,35 @@
+.wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 12px 24px;
+    display: grid;
+    gap: 16px;
+    box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 1px 1px rgba(67, 68, 69, 0.3);
+    border-radius: 6px;
+    width: 485px;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.buttons {
+    align-self: start;
+    display: grid;
+    align-items: center;
+    grid-template-columns: max-content max-content;
+    gap: 8px;
+}

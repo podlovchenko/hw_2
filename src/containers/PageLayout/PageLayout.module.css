@@ -1,0 +1,28 @@
+@import '../../vars.css';
+
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 0 var(--paddingH);
+    gap: 8px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: start;
+    padding: 10px 0;
+}
+
+.buttons {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto;
+    gap: 8px;
+}
+
+.content {
+    align-self: start;
+    padding: 0 0 var(--paddingV);
+}

@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 8px;
+    padding: 0 10px 0 13px;
+    height: 36px;
+    align-items: center;
+    max-width: 474px;
+    border: 2px solid #d9d9d9;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.isNumberType {
+    gap: 0;
+    width: 52px;
+}
+
+.focused {
+    border: 2px solid #b3b3b3;
+}
+
+.input {
+    border: 0;
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+    cursor: inherit;
+}
+
+.input::placeholder {
+    color: #000000;
+    opacity: 0.2;
+}
+
+.input:focus {
+    outline: none;
+}

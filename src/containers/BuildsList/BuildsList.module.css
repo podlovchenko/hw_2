@@ -1,0 +1,24 @@
+.container {
+    padding: 8px 0;
+    display: grid;
+    gap: 8px;
+    align-self: start;
+}
+
+.bigButton {
+    display: none;
+}
+
+.smallButton {
+    display: block;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .bigButton {
+        display: block;
+    }
+
+    .smallButton {
+        display: none;
+    }
+}
