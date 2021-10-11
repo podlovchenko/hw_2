@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Button from '../../components/Button/Button';
 import { IconType } from '../../components/Icon/Icon';
 import Input from '../../components/Input/Input';
@@ -17,8 +18,8 @@ import {
 import BuildsList from '../../containers/BuildsList/BuildsList';
 import { Modal } from '../../containers/Modal/Modal';
 import PageLayout from '../../containers/PageLayout/PageLayout';
-import { getBuilds, showMoreBuilds } from '../../dataProviders';
-import { IBuild } from '../../types/build';
+import { showMoreBuilds } from '../../dataProviders';
+import { getBuildsAsync, selectBuilds } from '../../reducers/repository';
 import { ISettings } from '../../types/settings';
 
 interface IProps {
@@ -31,16 +32,11 @@ const BuildsHistoryPage = ({ settings }: IProps) => {
         history.push(Path.Settings);
     };
 
-    const [builds, setBuilds] = useState<IBuild[]>([]);
+    const dispatch = useAppDispatch();
+    const builds = useAppSelector(selectBuilds);
     useEffect(() => {
-        (async () => {
-            const builds: IBuild[] = await getBuilds(settings.id);
-
-            if (settings) {
-                setBuilds(builds);
-            }
-        })();
-    }, [settings]);
+        dispatch(getBuildsAsync(settings.id));
+    }, [dispatch, settings]);
 
     const [commitHash, setCommitHash] = useState('');
     const onChangeCommitHash = useCallback(

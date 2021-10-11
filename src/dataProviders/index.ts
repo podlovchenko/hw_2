@@ -63,9 +63,9 @@ export const submitSettings = (data: FormData) =>
         setTimeout(() => {
             if (Math.random() > 0.5) {
                 const settings = {
+                    ...data,
                     id: 1,
                     title: data[IFormField.Repository],
-                    ...data,
                 };
 
                 localStorage.settings = JSON.stringify(settings);

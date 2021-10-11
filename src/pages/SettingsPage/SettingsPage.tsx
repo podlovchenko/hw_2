@@ -1,39 +1,41 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Title from '../../components/Title/Title';
 import { Path } from '../../constants/path';
 import { TITLE } from '../../constants/text';
 import PageLayout from '../../containers/PageLayout/PageLayout';
 import SettingsForm from '../../containers/SettingsForm/SettingsForm';
-import { getSettings, submitSettings } from '../../dataProviders';
-import { ISettings } from '../../types/settings';
+import {
+    getSettingsAsync,
+    selectSettings,
+    selectStatus,
+    submitSettingsAsync,
+} from '../../reducers/repository';
+import { FormData } from '../../types/form';
 
 const SettingsPage = () => {
-    const [settings, setSettings] = useState<ISettings | undefined>(undefined);
+    const dispatch = useAppDispatch();
+    const settings = useAppSelector(selectSettings);
+    const status = useAppSelector(selectStatus);
     useEffect(() => {
-        (async () => {
-            try {
-                const settings: ISettings = await getSettings();
-
-                console.log(settings);
-                if (settings) {
-                    setSettings(settings);
-                }
-            } catch {}
-        })();
-    }, []);
+        dispatch(getSettingsAsync());
+    }, [dispatch]);
 
     const history = useHistory();
     const onOpenMain = useCallback(() => {
         history.push(Path.Main);
     }, [history]);
 
+    const onSubmit = (data: FormData) => dispatch(submitSettingsAsync(data));
+
     return (
         <PageLayout title={<Title variant="gray">{TITLE}</Title>}>
             <SettingsForm
+                status={status}
                 settings={settings}
-                onSubmit={submitSettings}
+                onSubmit={onSubmit}
                 onCancel={onOpenMain}
                 onRedirect={onOpenMain}
             />
