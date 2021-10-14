@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../../components/Button/Button';
+import ButtonWithIcon from '../../components/ButtonWithIcon/ButtonWithIcon';
 import { IconType } from '../../components/Icon/Icon';
 import Input from '../../components/Input/Input';
-import SmallButton from '../../components/SmallButton/SmallButton';
 import Title from '../../components/Title/Title';
 import { Path } from '../../constants/path';
 import {
@@ -61,10 +61,13 @@ const BuildsHistoryPage = ({ settings }: IProps) => {
             title={<Title variant="gray">{settings.title}</Title>}
             buttons={
                 <>
-                    <SmallButton iconType={IconType.Play} onClick={onOpenModal}>
+                    <ButtonWithIcon
+                        iconType={IconType.Play}
+                        onClick={onOpenModal}
+                    >
                         {RUN_BUILD}
-                    </SmallButton>
-                    <SmallButton
+                    </ButtonWithIcon>
+                    <ButtonWithIcon
                         iconType={IconType.Settings}
                         onClick={onOpenSettings}
                     />

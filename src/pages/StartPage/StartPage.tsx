@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../../components/Button/Button';
+import ButtonWithIcon from '../../components/ButtonWithIcon/ButtonWithIcon';
 import Icon, { IconType } from '../../components/Icon/Icon';
-import SmallButton from '../../components/SmallButton/SmallButton';
 import Title from '../../components/Title/Title';
 import { Path } from '../../constants/path';
 import {
@@ -25,12 +25,12 @@ const StartPage = () => {
             contentClassName={classes.content}
             title={<Title variant="gray">{TITLE}</Title>}
             buttons={
-                <SmallButton
+                <ButtonWithIcon
                     iconType={IconType.Settings}
                     onClick={onOpenSettings}
                 >
                     Settings
-                </SmallButton>
+                </ButtonWithIcon>
             }
         >
             <div className={classes.container}>

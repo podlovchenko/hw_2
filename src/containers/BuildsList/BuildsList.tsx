@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from '../../components/Button/Button';
-import SmallButton from '../../components/SmallButton/SmallButton';
+import ButtonWithIcon from '../../components/ButtonWithIcon/ButtonWithIcon';
 import { SHOW_MORE } from '../../constants/text';
 import BuildCard from '../../containers/BuildCard/BuildCard';
 import { IBuild } from '../../types/build';
@@ -19,7 +19,9 @@ const BuildsList = ({ builds, onShowMore }: IProps) => {
                 <BuildCard key={build.id} {...build} />
             ))}
             <div className={classes.smallButton}>
-                <SmallButton onClick={onShowMore}>{SHOW_MORE}</SmallButton>
+                <ButtonWithIcon onClick={onShowMore}>
+                    {SHOW_MORE}
+                </ButtonWithIcon>
             </div>
             <Button
                 className={classes.bigButton}

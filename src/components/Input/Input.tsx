@@ -55,7 +55,11 @@ const Input = (props: IProps) => {
                         onChange={handleChange}
                     />
                     {Boolean(value) && (
-                        <Icon type={IconType.Clear} onClick={onClear} />
+                        <Icon
+                            className={classes.close}
+                            type={IconType.Clear}
+                            onClick={onClear}
+                        />
                     )}
                 </>
             )}

@@ -12,7 +12,12 @@
     color: #e00000;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 480px) {
+.link:focus {
+    color: #e00000;
+    outline: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 800px) {
     .link {
         line-height: 18px;
     }
