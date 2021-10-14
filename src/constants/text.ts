@@ -13,6 +13,11 @@ export const NEW_BUILD_DESCRIPTION = 'Enter the commit which you want to build';
 export const RUN_BUILD = 'Run build';
 export const COMMIT_HASH = 'Commit hash';
 
+export const SUPPORT = 'Support';
+export const LEARNING = 'Learning';
+export const VERSION = 'Русская версия';
+export const COPYRIGHT = '© 2020 Your Name';
+
 export const FIELDS = {
     [IFormField.Repository]: {
         label: 'GitHub repository',

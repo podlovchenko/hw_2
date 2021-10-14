@@ -36,3 +36,16 @@
 .input:focus {
     outline: none;
 }
+
+.close {
+    cursor: pointer;
+    fill: #cccccc;
+}
+
+.close:hover {
+    fill: #b3b3b3;
+}
+
+.close:active {
+    fill: #828282;
+}
